@@ -1,4 +1,3 @@
-
 pt1 = [];
 
 DISTRI_GRIDSIZE = 100;
