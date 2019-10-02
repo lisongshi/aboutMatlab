@@ -1,13 +1,16 @@
 function [sysError] = systemError(pt)
 TOTAL_NUM = 3000;
+
+%     size = 200^2
+ERROR_GRIDSIZE = 200;
+%SEG means system error grid  
+SEG = rand(13, 13, 2) * 20 - 10;
+
 %sysError(:,1) for X dirction & (:,2) for Y
 sysError = zeros(TOTAL_NUM,2);
-ERROR_GRIDSIZE = 100;
 %picture size = 1000 * 1000 
 %(:,:,1)for direction x & (:,:,2) for Y
 %11 - > 13 for boundary
-%SEG means system error grid 
-SEG = rand(13, 13, 2) * 10 - 5;
     for k = 1:TOTAL_NUM
         tempErrorX = 0;
         tempErrorY = 0;

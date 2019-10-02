@@ -3,7 +3,7 @@ pt1 = [];
 TOTAL_NUM = 3000;
 NUM_IN_EACH_GRID = 30;
 DISTRI_GRIDSIZE = 100;
-ERROR_GRIDSIZE = 100;
+
 for xi = 0:9
     for yi = 0:9
         pt_temp = zeros(NUM_IN_EACH_GRID,2);
@@ -53,5 +53,8 @@ corPoints(:,3) = pt3(:,1);
 corPoints(:,4) = pt3(:,2);
 
 %creat a flag vector to sign the grossError point
-flagError = grossErrors(:,3);
+corFlagError = grossErrors(:,3);
 
+
+matSaveTxt('corPoints.txt', corPoints, '%.10f');
+matSaveTxt('corFlagError.txt',corFlagError, '%d');
