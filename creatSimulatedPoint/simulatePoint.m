@@ -1,9 +1,12 @@
-pt1 = [];
 
+% set BATCH_SIZE as you like
+BATCH_SIZE = 5;
+
+for iterator = 1 : BATCH_SIZE
 TOTAL_NUM = 3000;
 NUM_IN_EACH_GRID = 30;
 DISTRI_GRIDSIZE = 100;
-
+pt1 = [];
 for xi = 0:9
     for yi = 0:9
         pt_temp = zeros(NUM_IN_EACH_GRID,2);
@@ -13,19 +16,21 @@ for xi = 0:9
     end
 end
 
-%method 1 : one pair may get system errors + gross errors meantime 
+%Mthod 1 : one pairs may get systemError and grossError meantime 
 % pt1 -> pt2 :add system errors by error grid whith cubic Conv in 2d
 %sysError = systemError(pt1);
 %pt2 = pt1 + sysError;
+
 %pt2 -> pt3 : add gross error by rand()
 %[grossErrors, corFlagError]  = grossError(pt2);
 %pt3 = zeros(TOTAL_NUM,2);
 %pt3(:,1) = pt2(:,1) + grossErrors(:,1);
 %pt3(:,2) = pt2(:,2) + grossErrors(:,2);
 
-%method 2 : one pair will get only one error  
-[errors,corFlagError] = errorsDifferent(pt1);
-pt3 = pt1 + errors;
+%Mthod 2 : one pairs only get systemError or grossError meantime in one
+%time
+[twoErrors,corFlagError] = errorsDifferent(pt1);
+pt3 = pt1 + twoErrors;
 
 %draw the point pt1,pt3
 figure(1);
@@ -42,5 +47,14 @@ corPoints(:,2) = pt1(:,2);
 corPoints(:,3) = pt3(:,1);
 corPoints(:,4) = pt3(:,2);
 
-matSaveTxt('D:\code\C++\changeGC\data\TEST-2\100x100\GER=0.2\SE=5,GE=10,Index=1_point.txt', corPoints, '%.8f');
-matSaveTxt('D:\code\C++\changeGC\data\TEST-2\100x100\GER=0.2\SE=5,GE=10,Index=1_flag.txt',corFlagError, '%d');
+dir = 'D:\code\C++\changeGC\data\TEST-2\100x100\GER=0.2TEST\';
+nameFirst = 'SE=5,GE=10,Index=';
+nameLast1 = '_point.txt';
+nameLast2 = '_flag.txt';
+%sprintf : get the dir & name of file
+strPoint = sprintf('%s%s%d%s',dir,nameFirst,iterator,nameLast1);
+strFlag = sprintf('%s%s%d%s',dir,nameFirst,iterator,nameLast2);
+matSaveTxt( strPoint, corPoints, '%.8f');
+matSaveTxt( strFlag, corFlagError, '%d');
+
+end
