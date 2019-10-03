@@ -1,8 +1,7 @@
 function [sysError] = systemError(pt)
-TOTAL_NUM = 3000;
-
+TOTAL_NUM = size(pt, 1);
 %     size = 200^2
-ERROR_GRIDSIZE = 200;
+ERROR_GRIDSIZE = 100;
 %SEG means system error grid  
 SEG = rand(13, 13, 2) * 20 - 10;
 
