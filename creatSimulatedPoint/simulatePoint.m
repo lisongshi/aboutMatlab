@@ -29,7 +29,7 @@ end
 
 %Mthod 2 : one pairs only get systemError or grossError meantime in one
 %time
-[twoErrors,corFlagError] = errorsDifferent(pt1);
+[twoErrors,corFlagError,sysGroup] = errorsDifferent(pt1);
 pt3 = pt1 + twoErrors;
 
 %draw the point pt1,pt3
@@ -48,13 +48,16 @@ corPoints(:,3) = pt3(:,1);
 corPoints(:,4) = pt3(:,2);
 
 dir = 'D:\code\C++\changeGC\data\TEST-2\100x100\GER=0.2TEST\';
-nameFirst = 'SE=5,GE=10,Index=';
+nameFirst = 'SE=10,GE=10,Index=';
 nameLast1 = '_point.txt';
 nameLast2 = '_flag.txt';
+nameLast3 = '_group.txt';
 %sprintf : get the dir & name of file
 strPoint = sprintf('%s%s%d%s',dir,nameFirst,iterator,nameLast1);
 strFlag = sprintf('%s%s%d%s',dir,nameFirst,iterator,nameLast2);
+strGroup = sprintf('%s%s%d%s',dir,nameFirst,iterator,nameLast3);
 matSaveTxt( strPoint, corPoints, '%.8f');
 matSaveTxt( strFlag, corFlagError, '%d');
+matSaveTxt( strGroup, sysGroup, '%d');
 
 end

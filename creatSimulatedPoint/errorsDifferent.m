@@ -1,12 +1,12 @@
 % a point pair will only get one type error, systemError or grossError
-function [twoErrors, flag] = errorsDifferent(pt)
+function [twoErrors, flag, group] = errorsDifferent(pt)
 TOTAL_NUM = size(pt, 1);
 ERROR_GRIDSIZE = 100;
-MAX_SE = 5;
+MAX_SE = 10;
 MAX_GE = 10;
 twoErrors = zeros(TOTAL_NUM, 2);
 flag = zeros(TOTAL_NUM, 1);
-goup = zeros(TOTAL_NUM, 1);
+group = zeros(TOTAL_NUM, 1);
 %SEG means system error grid  
 SEG = rand(13, 13, 2) * 2 * MAX_SE - MAX_SE;
 
@@ -37,6 +37,17 @@ SEG = rand(13, 13, 2) * 2 * MAX_SE - MAX_SE;
             end
             twoErrors(k, 1) = tempErrorX;
             twoErrors(k, 2) = tempErrorY;
+            if abs(tempErrorX) < 2
+                group(k, 1) = 1;
+            elseif abs(tempErrorX) >= 2 && abs(tempErrorX) < 4
+                group(k, 1) = 2;
+            elseif abs(tempErrorX) >= 4 && abs(tempErrorX) < 6   
+                group(k, 1) = 3;
+            elseif abs(tempErrorX) >= 6 && abs(tempErrorX) < 8   
+                group(k, 1) = 4;
+            elseif abs(tempErrorX) >= 8 && abs(tempErrorX) < 10   
+                group(k, 1) = 5;
+            end
         end
     end
 
