@@ -1,8 +1,8 @@
 % read img and transform it to csv format.
 % 26 Oct 2019
 % 1.this function could change the format of photos 
-% from jpg/bmp/png to csv/txt by matrix presenting.
-% 2.for use this,you may input the dirction saving photos
+% from jpg/bmp/png to csv/txt presenting as matries.
+% 2.for using this,you may input the dirction saving photos
 % and the number of photos as batchSize.
 % 3.for easily run batch,you may change the name of photos 
 % as "img1.xxx","img2.xxx" and so on
@@ -30,4 +30,5 @@ for k = 1:dim
     fprintf(fp,'\n');
 end
 flag = fclose(fp);
+end
 end
